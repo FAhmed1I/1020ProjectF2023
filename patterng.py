@@ -43,23 +43,30 @@ def user_input(length):
 
 # Main game loop
 def pattern_game():
-    pattern_length = 5 # Length of pattern, can change to scale with levels
-    pattern = generate_pattern(pattern_length)
-
+    pattern_length = 3 # Length of pattern, changes to scale with levels
+    level = 0
     print("Welcome to the Pattern Game!")
-    print("Watch the pattern of sound and light, then repeat it.")
-    print("Press 1 for the LED, and press 0 for the buzzer.")
-    print("Example: 11010")
-
-    play_pattern(pattern)
-    time.sleep(2)
     
-    user_pattern = user_input(pattern_length)
+    while True:
+        pattern = generate_pattern(pattern_length)
 
-    if user_pattern == pattern:
-        print("Congratulations! You matched the pattern.")
-        
-    else:
-        print("Sorry, your pattern didn't match.")
+        print("Watch the pattern of sound and light, then repeat it.")
+        print("Press 1 for the LED, and press 0 for the buzzer.")
+        print("Example: 11010")
+
+        play_pattern(pattern)
+        time.sleep(2)
+        user_pattern = user_input(pattern_length)
+
+        if user_pattern == pattern:
+            print("Congratulations! You matched the pattern.")
+            pattern_length += 1  # Increase pattern length upon correct match
+            level = pattern_length - 3
+            time.sleep(2)
+            
+        else:
+            print("Sorry, your pattern didn't match.")
+            print("You made it to level: ",level)
+            break
 
 pattern_game()
