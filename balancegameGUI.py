@@ -72,7 +72,7 @@ def blenca():
 
 
     blnce = Box(balance, align = 'bottom', layout="grid")
-    titular = Text(balance, 'ReactTest', size=80)
+    titular = Text(balance, 'BalanceIt', size=80)
     start = PushButton(balance, text='Press to Start',command=balance_test, image='balance.png')
     sec1 = Text(blnce, 'The game will proceed as follows:', size=24, grid=[0,0])
 
