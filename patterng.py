@@ -1,7 +1,9 @@
 import time
 import random
 from engi1020.arduino.api import *
+from guizero import App, Box, Picture, Text, TextBox, PushButton, Window
 
+pttrn = App(title='PatternTest')
 
 # Function to generate a random pattern
 def generate_pattern(length):
@@ -69,4 +71,24 @@ def pattern_game():
             print("You made it to level: ",level)
             break
 
+### The Graphical User Interface ###
+
+blank1 = Text(pttrn, size=50)
+blank2 = Text(pttrn, size=70, align='bottom')
+ptrn = Box(pttrn, align = 'bottom', layout="grid")
+titular = Text(pttrn, 'PatternTest', size=80)
+start = PushButton(pttrn, text='Press to Start',command=pattern_game, image='lightbulb_music.png')
+sec1 = Text(ptrn, 'Welcome to the Pattern Game!', size=30, grid=[0,0])
+sec2 = Text(ptrn, 'The game will proceed as follows:', size=24, grid=[0,1])
+
+inst1 = Text(ptrn, '1. Watch and listen to the pattern coming from the LED and Buzzer on the arduino.',grid=[0,2], align='left', size=18)
+inst2 = Text(ptrn, '2. Once the pattern is over, you will need to type a series of 1s and 0s.',grid=[0,3], align='left', size=18)
+inst3 = Text(ptrn, '3. 1s correspond to the LED, and 0s correspond to the Buzzer. (Example: 11010)', grid=[0,4], align='left', size=18)
+inst4 = Text(ptrn, '4. Each time you get the pattern correct the length of the pattern will increase by one.', grid=[0,5], align='left', size=18)
+inst5 = Text(ptrn, '5. If you get a pattern wrong your game will be over and you will be prompted to play again.',grid=[0,6], align='left', size=18)
+inst6 = Text(ptrn, '6. You will be able to see your score once the game is over.',grid=[0,7], align='left', size=18)
+inst7 = Text(ptrn, 'Press the Lightbulb to Start', grid=[0,8], size=24)
+
+pttrn.set_full_screen()
+pttrn.display()
 pattern_game()
