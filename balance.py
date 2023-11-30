@@ -39,7 +39,7 @@ def blenca():
         else:
             oled_clear()
             oled_print('Unstable')
-            if abs(sum(deviancey)) <= .4:
+            if abs(sum(deviancey)) > .4:
                 if abs(deviancey[0]) < abs(deviancey[1]):
                     problem = 'right arm weakness'
                     oled_print(problem)
@@ -52,7 +52,7 @@ def blenca():
             else:
                 None
                 
-            if abs(sum(deviancez)) <= .4:
+            if abs(sum(deviancez)) > .4:
                 if abs(deviancez[0]) > abs(deviancez[1]):
                     problem = 'raised too much'
                     oled_print(problem)
@@ -65,7 +65,7 @@ def blenca():
             else:
                 None
             
-            if abs(sum(deviancex)) <= .4:
+            if abs(sum(deviancex)) > .4:
                 if deviancex[0] >0 or deviancex[1]>0 :
                     problem = 'wrist instability'
                     oled_print(problem)
