@@ -16,7 +16,7 @@ def play_random_tone():
     return frequency
     
 def frequency_value(value):
-    # Map the dial value (0-1023) to a frequency range (200-2000 Hz)
+    # Map the dial value (0-1023) to a frequency range (300-2000 Hz)
     return int(value / 1023 * 1700) + 300
 
 # Main loop for the game
