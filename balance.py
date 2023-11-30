@@ -33,7 +33,7 @@ def blenca():
         if abs(sum(deviancex)) <= .4 and abs(sum(deviancey))  <= .4 and abs(sum(deviancez)) <= .4:
             oled_clear()
             oled_print('Seems stable')
-            problem = 'None'
+            problem = 'No issues found!'
             issues.append(problem)
         
         else:
