@@ -8,22 +8,24 @@ def blenca():
 
     def balance_test():
         x = []
-        y= []
+        y = []
         z = []
-        problem = []
         issues = []
-        x.append(three_axis_get_accelX())
-        y.append(three_axis_get_accelY())
-        z.append(three_axis_get_accelZ())
-        
+
         for i in range(30):
             x.append(three_axis_get_accelX())
             y.append(three_axis_get_accelY())
             z.append(three_axis_get_accelZ())
+            sleep(1)
+        
+        buzzer_frequency(5, 300)
+        sleep(1)
+        buzzer_stop(5)
         
         deviancex = [max(x) - x[0], x[0] - min(x)]
         deviancey = [max(y) - y[0], y[0] - min(x)]
         deviancez = [max(z) - z[0], z[0] - min(z)]
+        
         print(abs(sum(deviancex)),'x')
         print(abs(sum(deviancey)),'y')
         print(abs(sum(deviancez)),'z')
@@ -37,43 +39,49 @@ def blenca():
         else:
             oled_clear()
             oled_print('Unstable')
+            if abs(sum(deviancey)) <= .4:
+                if abs(deviancey[0]) < abs(deviancey[1]):
+                    problem = 'right arm weakness'
+                    oled_print(problem)
+                    issues.append(problem)
+                
+                elif abs(deviancey[0]) > abs(deviancey[1]):
+                    problem = 'left arm weakness'
+                    oled_print(problem)
+                    issues.append(problem)
+            else:
+                None
+                
+            if abs(sum(deviancez)) <= .4:
+                if abs(deviancez[0]) > abs(deviancez[1]):
+                    problem = 'raised too much'
+                    oled_print(problem)
+                    issues.append(problem)
+                
+                else:
+                    problem = 'dropped too much'
+                    oled_print(problem)
+                    issues.append(problem)
+            else:
+                None
             
-            if abs(deviancey[0]) < abs(deviancey[1]):
-                problem = 'right arm weakness'
-                oled_print(problem)
-                issues.append(problem)
-            
-            if abs(deviancey[0]) > abs(deviancey[1]):
-                problem = 'left arm weakness'
-                oled_print(problem)
-                issues.append(problem)
-            
-            if abs(deviancez[0]) > abs(deviancez[1]):
-                problem = 'raised too much'
-                oled_print(problem)
-                issues.append(problem)
-
+            if abs(sum(deviancex)) <= .4:
+                if deviancex[0] >0 or deviancex[1]>0 :
+                    problem = 'wrist instability'
+                    oled_print(problem)
+                    issues.append(problem)
             
             else:
-                problem = 'dropped too much'
-                oled_print(problem)
-                issues.append(problem)
-            
-            if deviancex[0] >0 or deviancex[1]>0 :
-                problem = 'wrist instability'
-                oled_print(problem)
-                issues.append(problem)
-            
+                None
+                
         balanceprobs = Window(balance, title='What we found')
-        resttl = Text(balanceprobs, size=60, text='Your balanceprobs')
+        resttl = Text(balanceprobs, size=60, text='Your Balance Problems')
         report = Picture(balanceprobs, image='report.png')
-        problems = Text(balanceprobs, size=30, text=f'The following issues were found {issues}')
+        problems = Text(balanceprobs, size=30, text=f'The following issues were found:\n {issues}')
         blank2 = Text(balanceprobs, size=40)
+        with open('resultats.txt', 'a') as r:
+            r.write(issues)
         resexit = Text(balanceprobs, size=30, text='Close this window to play again')
-        
-            
-        
-            
 
 
     blnce = Box(balance, align = 'bottom', layout="grid")
@@ -89,4 +97,4 @@ def blenca():
     inste6 = Text(blnce, 'Press the Balance to Start', grid=[0,6], size=24)
             
             
-     
+blenca()
