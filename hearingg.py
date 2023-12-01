@@ -6,9 +6,9 @@ frequency = 0
 
 # Function to play a random tone
 def play_random_tone():
-    frequency = random.randint(0, 1023)  # Generate a random frequency
+    frequency = random.randint(300, 2000)  # Generate a random frequency
     print(frequency)
-    duration = 2  # Set the duration of the tone (can change)
+    duration = 4  # Set the duration of the tone (can change)
 
     buzzer_frequency(5, frequency)  # Play the tone
     time.sleep(duration)  # Wait for the duration
