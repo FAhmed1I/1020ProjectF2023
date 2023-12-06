@@ -50,7 +50,7 @@ def sound_it():
                     ttl = Text(results, size=60, text='Congratulations! \nYou guessed the frequency!')
                     guesses = Text(results, size =30, text=f'It took you {guessos} guesses and {watch:.2f} seconds')
                     with open('resultats.txt', 'a') as r:
-                        r.write(f'{Guesses} guesses. Time: {watch:.3f} seconds')
+                        r.write(f'{guessos} guesses. Time: {watch:.3f} seconds')
                     start_again = Text(results, size=24, text='Close this window to play again')
                     break
                 
